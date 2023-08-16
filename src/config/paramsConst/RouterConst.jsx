@@ -5,4 +5,9 @@ export const ROUTER_CONST = {
   register: "/register",
   dashboard: "/dashboard",
   profile: "/profile",
+  questions: "/dashboard/questions",
+  categories: "/dashboard/categories",
+  exams: "/dashboard/exams",
+  dashboardHome: "/dashboard",
+  history: "/history",
 };

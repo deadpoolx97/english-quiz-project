@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Spin } from "antd";
 import Lession from "./Lession";
-import { getExamList } from "../../../services/examService";
-import { useState } from "react/cjs/react.development";
+import { getExamListByCategory } from "../../../services/examService";
 
 const { Search } = Input;
 
@@ -13,7 +12,7 @@ const Content = ({ currentMenu }) => {
 
   useEffect(() => {
     setLoadingData(true);
-    getExamList(
+    getExamListByCategory(
       currentMenu,
       (res) => {
         setListExam(res.data.data);
@@ -69,21 +68,28 @@ const Content = ({ currentMenu }) => {
         </div>
         <div className="list-box">
           <div className="row">
-            {listExam?.length > 0
-              ? listExam.map((exam) => {
-                  return (
-                    <Lession
-                      key={exam.id}
-                      id={exam.id}
-                      title={exam.examName}
-                      totalPoint={exam.totalPoint}
-                      totalTime={exam.totalTime}
-                    />
-                  );
-                })
-              : "No data"}
+            {listExam?.length > 0 ? (
+              listExam.map((exam) => {
+                return (
+                  <Lession
+                    key={exam.id}
+                    id={exam.id}
+                    title={exam.examName}
+                    totalPoint={exam.totalPoint}
+                    totalTime={exam.totalTime}
+                  />
+                );
+              })
+            ) : (
+              <div className="center" style={{ width: "100%" }}>
+                No data
+              </div>
+            )}
           </div>
         </div>
+        {/* <div className="center">
+          <Pagination defaultCurrent={1} total={50} />
+        </div> */}
       </Spin>
     </div>
   );
